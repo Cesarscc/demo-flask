@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+/* Diseño general de toda la pagina*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
+/* Diseño del body de la pagina*/
+body {
+  background-color: rgb(255, 255, 165);
+}
+
+/* Diseño general del header*/
+.header {
+  background-color: rgb(245, 196, 104);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 85px;
+  padding: 5px 10%;
+}
+
+/* Tamaño del logo del header*/
+.header .logo img {
+  height: 70px;
+  width: auto;
+  transition: all 0.3s;
+}
+
+/*Acción cuando el cursor pasa encima del logo*/
+.header .logo {
+  cursor: pointer;
+}
+
+.header .logo img:hover {
+  transform: scale(1.2);
+}
+
+/* Links */
+.header .nav-links {
+  list-style: none;
+}
+
+.header .nav-links li {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.header .nav-links li:hover {
+  transform: scale(1.2);
+}
+
+.nav-links a {
+  background-color: orange;
+  padding: 0 5px;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.header .nav-links li a:hover {
+  color: black;
+}
+
+.titulo__abarrotes {
+  text-align: center;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.box__container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.box__abarrotes {
+  width: 900px;
+  height: 500px;
+  background-color: white;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  display: flex;
+  justify-content: center;
+  margin-left: 0px;
+}
+
+.abarrotes__contenido {
+  width: 700px;
+  margin-top: 30px;
+}
+
+.table__abarrotes tr {
+  height: 30px;
+}
+
+.table__abarrotes {
+  text-align: center;
+}
+
+.table__header td {
+  padding: 0 50px;
+}
+
+.table__header th {
+  padding: 0 60px;
+}
+
+.table__abarrotes td {
+  border: 1px solid #000;
+}
+
+.table__abarrotes th {
+  border: 1px solid #000;
+}
+
+.box__form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  place-items: center;
+  width: 400px;
+  height: 250px;
+  background-color: white;
+  border: 2px solid black;
+  padding-top: 30px;
+  margin-bottom: 30px;
+}
+
+.content__input {
+  display: flex;
+  justify-content: center;
+}
+
+.content__input p {
+  width: 150px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+  margin-right: 20px;
+}
+
+.content__input input {
+  background-color: rgb(245, 196, 104);
+  width: 200px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  text-align: center;
+  font-weight: 600;
+}
+
+.button__generar {
+  display: flex;
+  justify-content: center;
+}
+
+.button__generar button {
+  width: 170px;
+  height: 50px;
+  background-color: orange;
+  border: 2px solid black;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+}
+
+.button__box__form {
+  display: grid;
+  justify-content: center;
+}
+
+.button__box__form button {
+  width: 170px;
+  height: 50px;
+  background-color: orange;
+  border: 2px solid black;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+}
+
+.buttons__form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+}
+.buttons__form button {
+  width: 170px;
+  height: 50px;
+  background-color: orange;
+  border: 2px solid black;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+}
+
+.box__buttons_output {
+  display: flex;
+  flex-direction: column;
+}
+
+.content__button_output {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Armado de verduras</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+
+        <link rel="stylesheet" href="../static/css/estilo3.css">
+        <script src="https://apis.google.com/js/api.js"></script>
+
+    </head>
+
+    <body>
+        
+        <!-- barra de navegación -->
+        <header class="header">
+            <div class="logo">
+                <img src="https://static.wixstatic.com/media/b12a39_afc4c44aa6ad464dadfd97b6f14b137d~mv2_d_1852_1359_s_2.png/v1/fill/w_1852,h_1359,al_c/b12a39_afc4c44aa6ad464dadfd97b6f14b137d~mv2_d_1852_1359_s_2.png" alt="logo de la marca">
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/principal">Regresar al inicio</a></li>
+
+                </ul>
+            </nav>
+        </header>
+            
+        <main>
+            <h1 class="titulo__abarrotes">Verduras</h1>
+            <div class="box__container">
+                <div class="box__abarrotes">
+                    <div class="abarrotes__contenido">
+                        <section id="miTabla">
+                            <table class="table__abarrotes">
+                                <tr class="table__header">
+                                    <td></td>
+                                    <th>Producto</th>
+                                    <th>Kilos por producto</th>
+                                    <th>Unidad</th>
+                                </tr>
+                            </table>
+                            <tbody>
+                                <!-- Aquí generaremos las filas con los datos -->
+                            </tbody>
+                        </section>
+                    </div>
+                </div>
+                <div class="box__buttons_output">
+                    <div class="box__form">
+                        <div class="content__input">
+                            <p>Número de Despensa</p>
+                            <input placeholder="Numero de despensas" type="text" name="numero_despensa" id="numero_despensa"
+                                required />
+                        </div>
+                        <div class="button__generar">
+                            <button type="button" id="generador">Generar</button>
+                        </div>
+                    </div>
+                    <div class="content__button_output">
+                        <div class="button__box__form">
+                            <button type="button" id="borrar_tabla">Borrar Tabla</button>
+                        </div>
+                        <div class="buttons__form">
+                            <button>Eliminar alimentos de la base</button>
+                            <button onclick="imprimirTabla()">Descargar Tabla</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </main>
+        
+        <!-- Bootstrap JavaScript Libraries -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+
+        <!--Boton para Imprimir la tabla-->
+        <script>
+            function imprimirTabla() {
+                const contenidoTabla = document.getElementById('miTabla').innerHTML;
+                const ventanaImpresion = window.open('', 'popimpr');
+                ventanaImpresion.document.write(`
+                <html>
+                <head>
+                    <style>
+                        .table__abarrotes {
+                            text-align: center;
+                            border-collapse: collapse;
+                            width: 100%;
+                        }
+        
+                        .table__abarrotes tr {
+                            height: 30px;
+                        }
+        
+                        .table__header td,
+                        .table__header th {
+                            padding: 0 50px;
+                            border: 1px solid #000;
+                            background-color: #f2f2f2;
+                        }
+        
+                        .table__abarrotes td,
+                        .table__abarrotes th {
+                            border: 1px solid #000;
+                            padding: 8px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${contenidoTabla}
+                </body>
+                </html>
+            `);
+                ventanaImpresion.document.close();
+
+                // Espera a que se cargue el contenido antes de imprimir
+                ventanaImpresion.onload = function () {
+                    ventanaImpresion.print();
+                    ventanaImpresion.close();
+                };
+            }
+
+
+        </script>
+        
+        <!--Traer datos-->
+        <script>
+            async function load() {
+                const spreadsheetId = '1yoNXkCwg6Uxbl9qLJsyoGe4Ki5_Ot6DppUplcI8t8Hs';
+                const apiKey = 'AIzaSyAez1VmoiUyIGiJ7XtV6PsLmtsqKQRPnZU'; // Reemplaza con tu propia clave de API
+
+                const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Hoja1?key=${apiKey}`;
+
+                try {
+                    const response = await fetch(apiUrl);
+                    const data = await response.json();
+                    return data.values; // Devuelve los datos obtenidos
+                } catch (error) {
+                    console.error('Error al obtener datos:', error);
+                    return null;
+                }
+            }
+
+            (async () => {
+                const dataForm = await load();
+                const dataFilter = dataForm.filter(data => data[0] == "verduras/fruta");
+
+                document.getElementById('generador').addEventListener('click', function () {
+                    var valorInput = document.getElementById('numero_despensa').value;
+                    console.log('Valor del input:', valorInput);
+                    document.getElementById('numero_despensa').value = '';
+
+                    // Obtén la referencia al cuerpo de la tabla
+                    const tbody = document.querySelector('tbody');
+
+                    dataFilter.sort((a, b) => {
+                        // Ordenar por prioridad (menor a mayor)
+                        if (a[5] !== b[5]) {
+                            return a[5] - b[5];
+                        }
+                        // Ordenar por cantidad (mayor a menor)
+                        if (a[2] !== b[2]) {
+                            return b[2] - a[2];
+                        }
+                        // Ordenar por fecha de caducidad (más próxima primero)
+                        return new Date(a[4]) - new Date(b[4]);
+                    });
+
+                    const productosSeleccionados = dataFilter.slice(0, 6);
+
+                    // Genera las filas con los datos
+                    productosSeleccionados.forEach((item, index) => {
+                        const row = document.createElement('tr');
+                        const cellIndex = document.createElement('td');
+                        cellIndex.textContent = index + 1; // Número de fila
+                        row.appendChild(cellIndex);
+
+                        // Agrega las posiciones 1 y 2
+                        for (let i = 1; i <= 3; i++) {
+                            const cell = document.createElement('td');
+                            if (i == 2) {
+                                let cantidad = item[i] * 1000 / item[i + 1];
+                                if (cantidad / 5 >= valorInput) {
+                                    cell.textContent = "5";
+                                } else if (cantidad / 4 >= valorInput) {
+                                    cell.textContent = "4"
+                                } else if (cantidad / 3 >= valorInput) {
+                                    cell.textContent = "3"
+                                } else if (cantidad / 2 >= valorInput) {
+                                    cell.textContent = "2"
+                                } else if (cantidad / 2 < valorInput) {
+                                    cell.textContent = "1"
+                                }
+                            } 
+                            else if(i==3){
+                                cell.textContent = "Kg";
+                            }else{
+                                cell.textContent = item[i];
+                            }
+                            row.appendChild(cell);
+                        }
+
+                        tbody.appendChild(row);
+                    });
+
+                });
+
+            })();
+        </script>
+        
+        <script>
+            document.getElementById('borrar_tabla').addEventListener('click', function () {
+                const tbody = document.querySelector('tbody'); // Obtén la referencia al cuerpo de la tabla
+                const filas = tbody.querySelectorAll('tr'); // Selecciona todas las filas
+
+                // Itera a partir de la segunda fila (índice 1) y elimina las filas restantes
+                for (let i = 1; i < filas.length; i++) {
+                    filas[i].remove();
+                }
+            });
+        </script>
+    </body>
+</html>

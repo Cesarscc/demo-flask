@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+/* Diseño general de toda la pagina*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
+/* Diseño general del HEADER*/
+.header {
+  background-color: rgb(245, 196, 104);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 85px;
+  padding: 5px 10%;
+}
+
+/* Tamaño del logo del header*/
+.header .logo img {
+  height: 70px;
+  width: auto;
+  transition: all 0.3s;
+}
+
+/*Acción cuando el cursor pasa encima del logo*/
+.header .logo {
+  cursor: pointer;
+}
+
+.header .logo img:hover {
+  transform: scale(1.2);
+}
+
+/* Links */
+.header .nav-links {
+  list-style: none;
+}
+
+.header .nav-links li {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.header .nav-links li:hover {
+  transform: scale(1.2);
+}
+
+.header .nav-links a {
+  background-color: orange;
+  padding: 0 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.header .nav-links li a:hover {
+  color: black;
+}
+
+/* Diseño del BODY*/
+body {
+  background-color: whitesmoke;
+}
+
+/* Diseño del contenedor del body*/
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Diseño del contenedor del body*/
+.card {
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  background: white;
+  justify-content: center;
+  width: 270px;
+  height: 400px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+/* Imagen de la tarjeta */
+.card-image {
+  height: 250px;
+  margin-bottom: 15px;
+}
+
+.img {
+  width: 100%;
+  height: 250px;
+}
+
+/* Diseño del boton "realizar" de la tarjeta */
+.btn {
+  width: 100%;
+  background: rgb(245, 196, 104);
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* Titulo de las tarjetas*/
+.card-title {
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Estilo de la pregunta */
+.h3 {
+  text-align: center;
+}
