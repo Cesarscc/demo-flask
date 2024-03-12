@@ -170,66 +170,78 @@
 
                     document.getElementById('generador').addEventListener('click', function () {
                         var valorInput = document.getElementById('numero_despensa').value;
-                        
-                        document.getElementById('numero_despensa').value = '';
-                        // Obtén la referencia al cuerpo de la tabla
-                        const tbody = document.querySelector('tbody');
-                        
-                        dataFilter.sort((a, b) => {
-                            // Ordenar por prioridad (menor a mayor)
-                            if (a[5] !== b[5]) {
-                                return a[5] - b[5];
-                            }
-                            // Ordenar por cantidad (mayor a menor)
-                            if (a[2] !== b[2]) {
-                                return b[2] - a[2];
-                            }
-                            // Ordenar por fecha de caducidad (más próxima primero)
-                            return new Date(a[4]) - new Date(b[4]);
-                        });
-                        
-                        const productosSeleccionados = dataFilter.slice(0, 6);
-                        productosSelec = [... dataFilter.slice(0, 6)];
-                        // Genera las filas con los datos
-                        
+                        const tbody = document.querySelector('tbody'); // Obtén la referencia al cuerpo de la tabla
+                        const filas = tbody.querySelectorAll('tr'); // Selecciona todas las filas
 
-                        productosSeleccionados.forEach((item, index) => {
-                            const row = document.createElement('tr');
-                            const cellIndex = document.createElement('td');
-                            cellIndex.textContent = index + 1; // Número de fila
-                            row.appendChild(cellIndex);
-                            
-                            // Agrega las posiciones 1 y 2
-                            for (let i = 1; i <= 2; i++) {
-                                const cell = document.createElement('td');
-                                if(i==2){
-                                    let cantidad = item[i]*1000/ item[i+1];
-                                    if(cantidad /5>= valorInput){
-                                        cell.textContent = "5";
-                                        aux = 5;
-                                    }else if(cantidad / 4 >= valorInput){
-                                        cell.textContent = "4"
-                                        aux = 4;
-                                    } else if (cantidad / 3 >= valorInput) {
-                                        cell.textContent = "3"
-                                        aux = 3;
-                                    } else if (cantidad / 2 >= valorInput) {
-                                        cell.textContent = "2"
-                                        aux = 2;
-                                    } else if (cantidad / 2 < valorInput) {
-                                        cell.textContent = "1"
-                                        aux = 1;
+                        if(filas.length>1){
+                            window.alert("Primero Borre la tabla para poder generar otra")
+                        }else{
+                            if (valorInput == "" || valorInput < 0) {
+                                window.alert("Tiene que ingresar el número de Dispensas y ser un número positivo");
+                            } else {
+                                document.getElementById('numero_despensa').value = '';
+                                // Obtén la referencia al cuerpo de la tabla
+                                const tbody = document.querySelector('tbody');
+
+                                dataFilter.sort((a, b) => {
+                                    // Ordenar por prioridad (menor a mayor)
+                                    if (a[5] !== b[5]) {
+                                        return a[5] - b[5];
                                     }
-                                    arrayCantidad.push((item[i] * 1000 -aux*valorInput* item[i + 1])/1000)
-                                }else{
-                                    cell.textContent = item[i];
-                                }
-                                
-                                row.appendChild(cell);
-                            }
+                                    // Ordenar por cantidad (mayor a menor)
+                                    if (a[2] !== b[2]) {
+                                        return b[2] - a[2];
+                                    }
+                                    // Ordenar por fecha de caducidad (más próxima primero)
+                                    return new Date(a[4]) - new Date(b[4]);
+                                });
 
-                            tbody.appendChild(row);
-                        });
+                                const productosSeleccionados = dataFilter.slice(0, 6);
+                                productosSelec = [...dataFilter.slice(0, 6)];
+                                // Genera las filas con los datos
+
+
+                                productosSeleccionados.forEach((item, index) => {
+                                    const row = document.createElement('tr');
+                                    const cellIndex = document.createElement('td');
+                                    cellIndex.textContent = index + 1; // Número de fila
+                                    row.appendChild(cellIndex);
+
+                                    // Agrega las posiciones 1 y 2
+                                    for (let i = 1; i <= 2; i++) {
+                                        const cell = document.createElement('td');
+                                        if (i == 2) {
+                                            let cantidad = item[i] * 1000 / item[i + 1];
+                                            if (cantidad / 5 >= valorInput) {
+                                                cell.textContent = "5";
+                                                aux = 5;
+                                            } else if (cantidad / 4 >= valorInput) {
+                                                cell.textContent = "4"
+                                                aux = 4;
+                                            } else if (cantidad / 3 >= valorInput) {
+                                                cell.textContent = "3"
+                                                aux = 3;
+                                            } else if (cantidad / 2 >= valorInput) {
+                                                cell.textContent = "2"
+                                                aux = 2;
+                                            } else if (cantidad / 2 < valorInput) {
+                                                cell.textContent = "1"
+                                                aux = 1;
+                                            }
+                                            arrayCantidad.push((item[i] * 1000 - aux * valorInput * item[i + 1]) / 1000)
+                                        } else {
+                                            cell.textContent = item[i];
+                                        }
+
+                                        row.appendChild(cell);
+                                    }
+
+                                    tbody.appendChild(row);
+                                });
+                            }
+                        }
+                        
+                        
                     });
                     
                     

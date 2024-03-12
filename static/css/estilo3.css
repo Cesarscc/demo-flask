@@ -130,7 +130,7 @@ body {
   grid-gap: 20px;
   place-items: center;
   width: 400px;
-  height: 250px;
+  height: 280px;
   background-color: white;
   border: 2px solid black;
   padding-top: 30px;
@@ -178,6 +178,32 @@ body {
 .button__box__form {
   display: grid;
   justify-content: center;
+}
+
+.tam_despensa{
+  display: flex;
+  justify-content: space-between;
+}
+
+.tam_despensa p{
+  width: 150px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.button__type_despensa{
+  display: flex;
+  gap: 30px;
+}
+
+.tam_despensa button {
+  width: 95px;
+  height: 50px;
+  background-color: orange;
+  border: 2px solid black;
+  text-align: center;
+  color: white;
+  font-weight: 600;
 }
 
 .button__box__form button {

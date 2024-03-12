@@ -67,6 +67,15 @@
                         <div class="button__generar">
                             <button type="button" id="generador">Generar</button>
                         </div>
+                        <div class="tam_despensa">
+                            <p>Tamaño de Despensa</p>
+                            <div class="button__type_despensa">
+                                <button type="button" id="btn_chica">
+                                    Chica
+                                </button>
+                                <button type="button" id="btn_grande">Grande</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="content__button_output">
                         <div class="button__box__form">
@@ -166,66 +175,114 @@
             (async () => {
                 const dataForm = await load();
                 const dataFilter = dataForm.filter(data => data[0] == "verduras/fruta");
-
-                document.getElementById('generador').addEventListener('click', function () {
-                    var valorInput = document.getElementById('numero_despensa').value;
-                    console.log('Valor del input:', valorInput);
-                    document.getElementById('numero_despensa').value = '';
-
-                    // Obtén la referencia al cuerpo de la tabla
-                    const tbody = document.querySelector('tbody');
-
-                    dataFilter.sort((a, b) => {
-                        // Ordenar por prioridad (menor a mayor)
-                        if (a[5] !== b[5]) {
-                            return a[5] - b[5];
-                        }
-                        // Ordenar por cantidad (mayor a menor)
-                        if (a[2] !== b[2]) {
-                            return b[2] - a[2];
-                        }
-                        // Ordenar por fecha de caducidad (más próxima primero)
-                        return new Date(a[4]) - new Date(b[4]);
-                    });
-
-                    const productosSeleccionados = dataFilter.slice(0, 6);
-
-                    // Genera las filas con los datos
-                    productosSeleccionados.forEach((item, index) => {
-                        const row = document.createElement('tr');
-                        const cellIndex = document.createElement('td');
-                        cellIndex.textContent = index + 1; // Número de fila
-                        row.appendChild(cellIndex);
-
-                        // Agrega las posiciones 1 y 2
-                        for (let i = 1; i <= 3; i++) {
-                            const cell = document.createElement('td');
-                            if (i == 2) {
-                                let cantidad = item[i] * 1000 / item[i + 1];
-                                if (cantidad / 5 >= valorInput) {
-                                    cell.textContent = "5";
-                                } else if (cantidad / 4 >= valorInput) {
-                                    cell.textContent = "4"
-                                } else if (cantidad / 3 >= valorInput) {
-                                    cell.textContent = "3"
-                                } else if (cantidad / 2 >= valorInput) {
-                                    cell.textContent = "2"
-                                } else if (cantidad / 2 < valorInput) {
-                                    cell.textContent = "1"
-                                }
-                            } 
-                            else if(i==3){
-                                cell.textContent = "Kg";
-                            }else{
-                                cell.textContent = item[i];
-                            }
-                            row.appendChild(cell);
-                        }
-
-                        tbody.appendChild(row);
-                    });
-
+                let value_tam;
+                value_tam = document.getElementById('btn_chica').addEventListener('click', function () {
+                    value_tam = 7;
+                    window.alert("Ha seleccionado Tamaño Chico de Dispensa");
                 });
+
+                value_tam =document.getElementById('btn_grande').addEventListener('click', function () {
+                    value_tam = 14;
+                    window.alert("Ha seleccionado Tamaño Grande de Dispensa");
+                    
+                });
+                
+                document.getElementById('generador').addEventListener('click', function () {
+                        var valorInput = document.getElementById('numero_despensa').value;
+                        const tbody = document.querySelector('tbody'); // Obtén la referencia al cuerpo de la tabla
+                        const filas = tbody.querySelectorAll('tr'); // Selecciona todas las filas
+
+                        if(filas.length>1){
+                            window.alert("Primero Borre la tabla para poder generar otra")
+                        }else{
+                            if (valorInput == "" || valorInput < 0 || !value_tam) {
+                                window.alert("Tiene que ingresar el número de Dispensas (tiene que ser un número positivo) y/o seleccionar el tamaño de la Dispensa");
+                            } else {
+                                console.log('Valor del input:', valorInput);
+                                document.getElementById('numero_despensa').value = '';
+
+                                // Obtén la referencia al cuerpo de la tabla
+                                const tbody = document.querySelector('tbody');
+
+                                dataFilter.sort((a, b) => {
+                                    // Ordenar por prioridad (menor a mayor)
+                                    if (a[5] !== b[5]) {
+                                        return a[5] - b[5];
+                                    }
+                                    // Ordenar por cantidad (mayor a menor)
+                                    if (a[2] !== b[2]) {
+                                        return b[2] - a[2];
+                                    }
+                                    // Ordenar por fecha de caducidad (más próxima primero)
+                                    return new Date(a[4]) - new Date(b[4]);
+                                });
+
+                                const productosSeleccionados = dataFilter.slice(0, 6);
+
+                                // Genera las filas con los datos
+                                productosSeleccionados.forEach((item, index) => {
+                                    const row = document.createElement('tr');
+                                    const cellIndex = document.createElement('td');
+                                    cellIndex.textContent = index + 1; // Número de fila
+                                    row.appendChild(cellIndex);
+
+                                    let x1 = 0;
+                                    // Agrega las posiciones 1 y 2
+                                    for (let i = 1; i <= 3; i++) {
+                                        const cell = document.createElement('td');
+                                        if (i == 2) {
+                                            let cantidad = item[i];
+                                            if (value_tam == 7) {
+                                                let b = Math.floor(cantidad / valorInput);
+                                                if (b >= 1) {
+                                                    let x1_1 = x1 + b;
+                                                    if (x1_1 < 7) {
+                                                        cell.textContent = b;
+                                                        x1 = x1 + b;
+                                                    } else if (x1_1 >= 7) {
+                                                        e = 7 - x1;
+                                                        cell.textContent = e;
+                                                        x1 = x1 + e;
+                                                    }
+                                                } else {
+                                                    cell.textContent = 0
+                                                }
+                                            } else {
+                                                let b = Math.floor(cantidad / valorInput);
+                                                if (b >= 1) {
+                                                    let x1_1 = x1 + b;
+                                                    if (x1_1 < 14) {
+                                                        cell.textContent = b;
+                                                        x1 = x1 + b;
+                                                    } else if (x1_1 >= 14) {
+                                                        e = 14 - x1;
+                                                        cell.textContent = e;
+                                                        x1 = x1 + e;
+                                                    }
+                                                } else {
+                                                    cell.textContent = 0;
+                                                }
+                                            }
+
+                                        }
+                                        else if (i == 3) {
+                                            cell.textContent = "Kg";
+                                        } else {
+                                            cell.textContent = item[i];
+                                        }
+                                        row.appendChild(cell);
+                                    }
+
+                                    tbody.appendChild(row);
+                                    value_tam = "";
+                                });
+                            }
+                        }
+                        
+                        
+
+                    });
+
 
             })();
         </script>
