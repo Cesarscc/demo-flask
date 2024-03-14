@@ -1,0 +1,28 @@
+body {
+  background-color: whitesmoke;
+}
+
+.table__abarrotes tr {
+  height: 30px;
+}
+
+.table__abarrotes {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.table__header td {
+  padding: 0 50px;
+}
+
+.table__header th {
+  padding: 0 60px;
+}
+
+.table__abarrotes td {
+  border: 2px solid #000;
+}
+
+.table__abarrotes th {
+  border: 2px solid #000;
+}

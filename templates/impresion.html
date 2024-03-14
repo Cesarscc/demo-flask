@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impresión Tabla Generada</title>
+    <link rel="stylesheet" href="/static/css/estilo4.css">
+    <link rel="stylesheet" href="/static/css/estilo5.css">
+
+</head>
+<body>
+    <main>
+        <header class="header">
+            <div class="image__header">
+                <img src="/static/img/logo.png" width="160px" height="120px"/>
+            </div>
+            <div class="info__header">
+                <p>Cam. Antiguo a Tlaxcala 209, Parque Industrial, 72680 San Francisco Ocotlán, Pue.</p>
+                <p class="info__phone"><span class="phone_number">Teléfono:</span> <span class="phone_number">222 288 5700</span></p>
+            </div>
+        </header>
+        <div class="title__impresion">
+            <h2>DISTRIBUCIÓN DE DESPENSAS</h2>
+            <h5 id="fecha_actual"></h5>
+        </div>
+        <div id="tablaContainer">
+            <!-- La tabla se insertará aquí -->
+        </div>
+        <div class="firmas__impresion">
+            <div>
+                <hr class="firma__1"/>
+                <p>Nombre y firma de quien genera la tabla</p>
+            </div>
+            <div>
+                <hr class="firma__2" />
+                <p>Nombre y firma de quien autoriza</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Obtener la fecha actual
+        let fechaActual = new Date();
+
+        // Formatear la fecha en el formato deseado (por ejemplo, DD/MM/AAAA)
+        let dia = fechaActual.getDate();
+        let mes = fechaActual.getMonth() + 1; // Los meses en JavaScript se indexan desde 0
+        let year = fechaActual.getFullYear();
+
+        // Agregar un cero delante si el día o el mes son menores que 10
+        if (dia < 10) {
+            dia = '0' + dia;
+        }
+        if (mes < 10) {
+            mes = '0' + mes;
+        }
+
+        // Construir la fecha en formato DD/MM/AAAA
+        let fechaFormateada = dia + '/' + mes + '/' + year;
+
+        // Insertar la fecha en el elemento <h5> con el id "fecha_actual"
+
+        // Obtener la hora local
+        let horaActual = new Date();
+
+        // Extraer las horas, minutos y segundos
+        let horas = horaActual.getHours();
+        let minutos = horaActual.getMinutes();
+        let segundos = horaActual.getSeconds();
+
+        // Formatear la hora con ceros adicionales si es necesario
+        if (horas < 10) {
+                horas = '0' + horas;
+        }
+        if (minutos < 10) {
+            minutos = '0' + minutos;
+        }
+        if (segundos < 10) {
+            segundos = '0' + segundos;
+        }
+
+        // Construir la hora en formato HH:MM:SS
+        let horaFormateada = horas + ':' + minutos + ':' + segundos;
+
+        // Insertar la hora en el elemento <h5> con el id "hora_local"
+        document.getElementById('fecha_actual').innerText = 'Fecha actual: ' + fechaFormateada + " Hora: " + horaFormateada;
+
+    </script>
+
+    <script>
+        // Obtener el contenido de la tabla almacenado en sessionStorage
+        var tablaHTML = sessionStorage.getItem('tablaHTML');
+
+        // Insertar la tabla en el div con id "tablaContainer"
+        document.getElementById('tablaContainer').innerHTML = tablaHTML;
+
+        // Generar PDF y descargar automáticamente
+        window.print();
+        setTimeout(function () {
+                window.history.back();
+            }, 4000);
+    </script>
+</body>
+</html>

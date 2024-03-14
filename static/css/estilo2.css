@@ -51,8 +51,7 @@
 .header .nav-links a {
   background-color: orange;
   padding: 0 10px;
-  border: 1px solid black;
-  border-radius: 10px;
+  border-radius: 8px;
   text-align: center;
   color: white;
   font-weight: 600;
@@ -104,12 +103,17 @@ body {
 /* Diseño del boton "realizar" de la tarjeta */
 .btn {
   width: 100%;
-  background: rgb(245, 196, 104);
+  background: orange;
   color: #fff;
   padding: 10px;
   text-align: center;
   margin-top: 10px;
   border-radius: 8px;
+}
+
+.card .card-title a:hover {
+  color: black;
+  transform: scale(1.2);
 }
 
 /* Titulo de las tarjetas*/

@@ -38,7 +38,7 @@
         </header>
             
         <main>
-            <h1 class="titulo__abarrotes">Verduras</h1>
+            <h3 class="titulo__abarrotes">Verduras</h3>
             <div class="box__container">
                 <div class="box__abarrotes">
                     <div class="abarrotes__contenido">
@@ -61,7 +61,7 @@
                     <div class="box__form">
                         <div class="content__input">
                             <p>Número de Despensa</p>
-                            <input placeholder="Numero de despensas" type="text" name="numero_despensa" id="numero_despensa"
+                            <input placeholder="No. de despensas" type="text" name="numero_despensa" id="numero_despensa"
                                 required />
                         </div>
                         <div class="button__generar">
@@ -79,11 +79,10 @@
                     </div>
                     <div class="content__button_output">
                         <div class="button__box__form">
-                            <button type="button" id="borrar_tabla">Borrar Tabla</button>
+                            <button type="button" id="borrar_tabla">Borrar tabla</button>
                         </div>
                         <div class="buttons__form">
-                            <button>Eliminar alimentos de la base</button>
-                            <button onclick="imprimirTabla()">Descargar Tabla</button>
+                            <button onclick="imprimirTabla()">Descargar tabla</button>
                         </div>
                     </div>
                 </div>
@@ -107,48 +106,11 @@
         <!--Boton para Imprimir la tabla-->
         <script>
             function imprimirTabla() {
-                const contenidoTabla = document.getElementById('miTabla').innerHTML;
-                const ventanaImpresion = window.open('', 'popimpr');
-                ventanaImpresion.document.write(`
-                <html>
-                <head>
-                    <style>
-                        .table__abarrotes {
-                            text-align: center;
-                            border-collapse: collapse;
-                            width: 100%;
-                        }
-        
-                        .table__abarrotes tr {
-                            height: 30px;
-                        }
-        
-                        .table__header td,
-                        .table__header th {
-                            padding: 0 50px;
-                            border: 1px solid #000;
-                            background-color: #f2f2f2;
-                        }
-        
-                        .table__abarrotes td,
-                        .table__abarrotes th {
-                            border: 1px solid #000;
-                            padding: 8px;
-                        }
-                    </style>
-                </head>
-                <body>
-                    ${contenidoTabla}
-                </body>
-                </html>
-            `);
-                ventanaImpresion.document.close();
+                let tablaHTML = document.getElementById('miTabla').innerHTML;
 
-                // Espera a que se cargue el contenido antes de imprimir
-                ventanaImpresion.onload = function () {
-                    ventanaImpresion.print();
-                    ventanaImpresion.close();
-                };
+                // Almacenar el contenido en el sessionStorage
+                sessionStorage.setItem('tablaHTML', tablaHTML);
+                window.location.href = '/impresion/';
             }
 
 

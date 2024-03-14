@@ -1,0 +1,51 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image__header {
+  opacity: 0.7;
+}
+
+.info__header p {
+  text-align: right;
+}
+
+.info__phone .phone_number {
+  text-decoration: underline;
+}
+
+.title__impresion {
+  margin-top: 60px;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.title__impresion h2 {
+  text-align: center;
+  font-weight: 600;
+}
+
+.title__impresion h5 {
+  text-align: center;
+  font-weight: 400;
+}
+
+.firmas__impresion {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.firmas__impresion hr {
+  height: 2px;
+  background-color: black;
+}
+
+.firmas__impresion p {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#tablaContainer {
+  margin: 40px auto 150px auto;
+  width: fit-content;
+}

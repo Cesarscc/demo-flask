@@ -37,12 +37,12 @@
             </nav>
         </header>
         <main >
-            <h1 class="titulo__abarrotes">Abarrotes</h1>
+            <h3 class="titulo__abarrotes">Abarrotes</h3>
             <div class="box__container">
                 <div class="box__abarrotes">
                     <div class="abarrotes__contenido">
                         <section id="miTabla">
-                        <table  class="table__abarrotes">
+                        <table id="tabla__abarrotes"  class="table__abarrotes">
                             <tr class="table__header">
                                 <td></td>
                                 <th>Producto</th>
@@ -59,20 +59,19 @@
                 <div class="box__form">
                     <div class="content__input">
                         <p>Número de Despensa</p>
-                        <input placeholder="Numero de despensas" type="text" name="numero_despensa" id="numero_despensa" required/>
+                        <input placeholder="No. de despensas" type="text" name="numero_despensa" id="numero_despensa" required/>
                     </div>
                     <div class="button__generar">
                         <button type="button" id="generador">Generar</button>
                     </div>
                 </div>
                 <div class="content__button_output">
-                <div class="button__box__form">
-                    <button type="button" id="borrar_tabla">Borrar Tabla</button>
-                </div>
-                <div class="buttons__form">
-                    <button type="button" id="borrar_base">Eliminar alimentos de la base</button>
-                    <button onclick="imprimirTabla()">Descargar Tabla</button>
-                </div>
+                    <div class="button__box__form">
+                        <button type="button" id="borrar_tabla">Borrar tabla</button>
+                    </div>
+                    <div class="buttons__form">
+                        <button onclick="imprimirTabla()">Descargar tabla</button>
+                    </div>
                 </div>
                 </div>
             </div>
@@ -95,48 +94,13 @@
         <!--Boton para Imprimir la tabla-->
         <script>
             function imprimirTabla() {
-                    const contenidoTabla = document.getElementById('miTabla').innerHTML;
-                    const ventanaImpresion = window.open('', 'popimpr');
-                    ventanaImpresion.document.write(`
-        <html>
-        <head>
-            <style>
-                .table__abarrotes {
-                    text-align: center;
-                    border-collapse: collapse;
-                    width: 100%;
-                }
+                    // Obtener el contenido de la tabla
+                let tablaHTML = document.getElementById('miTabla').innerHTML;
 
-                .table__abarrotes tr {
-                    height: 30px;
-                }
-
-                .table__header td,
-                .table__header th {
-                    padding: 0 50px;
-                    border: 1px solid #000;
-                    background-color: #f2f2f2;
-                }
-
-                .table__abarrotes td,
-                .table__abarrotes th {
-                    border: 1px solid #000;
-                    padding: 8px;
-                }
-            </style>
-        </head>
-        <body>
-            ${contenidoTabla}
-        </body>
-        </html>
-    `);
-                    ventanaImpresion.document.close();
-
-                    // Espera a que se cargue el contenido antes de imprimir
-                    ventanaImpresion.onload = function () {
-                        ventanaImpresion.print();
-                        ventanaImpresion.close();
-                    };
+                // Almacenar el contenido en el sessionStorage
+                sessionStorage.setItem('tablaHTML', tablaHTML);
+                window.location.href = '/impresion/';
+                
                 }
 
 
@@ -169,7 +133,7 @@
                     let productosSelec;
 
                     document.getElementById('generador').addEventListener('click', function () {
-                        var valorInput = document.getElementById('numero_despensa').value;
+                        let valorInput = document.getElementById('numero_despensa').value;
                         const tbody = document.querySelector('tbody'); // Obtén la referencia al cuerpo de la tabla
                         const filas = tbody.querySelectorAll('tr'); // Selecciona todas las filas
 
@@ -275,7 +239,7 @@
                         async function actualizarFila(fila, nuevosValores) {
                             try {
                                 const range = `Hoja1!${fila}:${fila}`; // Cambia al rango de la fila deseada
-                                var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + spreadsheetId + '/values/' + range ;
+                                let url = 'https://sheets.googleapis.com/v4/spreadsheets/' + spreadsheetId + '/values/' + range ;
 
                                 const response = await fetch(url, {
                                     method: 'PUT',

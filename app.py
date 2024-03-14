@@ -39,6 +39,10 @@ def crear_app():
     def abarrotes():
         return render_template("abarrotes.html")
 
+    @app.route("/impresion/")
+    def impresion():
+        return render_template("impresion.html")
+    
     return app
 
 if __name__ == "__main__" :

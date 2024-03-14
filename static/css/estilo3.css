@@ -10,7 +10,7 @@
 
 /* Diseño del body de la pagina*/
 body {
-  background-color: rgb(255, 255, 165);
+  background-color: whitesmoke;
 }
 
 /* Diseño general del header*/
@@ -56,8 +56,7 @@ body {
 .nav-links a {
   background-color: orange;
   padding: 0 5px;
-  border: 1px solid black;
-  border-radius: 10px;
+  border-radius: 8px;
   text-align: center;
   color: white;
   font-weight: 600;
@@ -83,18 +82,20 @@ body {
   justify-content: space-around;
 }
 
+/* Tarjeta derecha que contiene la tabla */
 .box__abarrotes {
-  width: 900px;
-  height: 500px;
+  width: 800px;
+  height: 400px;
   background-color: white;
-  border-color: black;
-  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.2);
+  border-width: 4px;
   border-style: solid;
   display: flex;
   justify-content: center;
   margin-left: 0px;
 }
 
+/* Formato para la tabla generada */
 .abarrotes__contenido {
   width: 700px;
   margin-top: 30px;
@@ -106,6 +107,7 @@ body {
 
 .table__abarrotes {
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .table__header td {
@@ -117,13 +119,14 @@ body {
 }
 
 .table__abarrotes td {
-  border: 1px solid #000;
+  border: 2px solid #000;
 }
 
 .table__abarrotes th {
-  border: 1px solid #000;
+  border: 2px solid #000;
 }
 
+/* Tarjeta derecha que contiene los botones*/
 .box__form {
   display: grid;
   grid-template-columns: 1fr;
@@ -132,7 +135,7 @@ body {
   width: 400px;
   height: 280px;
   background-color: white;
-  border: 2px solid black;
+  border: 4px solid rgba(255, 255, 255, 0.2);
   padding-top: 30px;
   margin-bottom: 30px;
 }
@@ -150,14 +153,16 @@ body {
   margin-right: 20px;
 }
 
+/* Recuadro para poner cuantas despensas se van a realizar */
 .content__input input {
   background-color: rgb(245, 196, 104);
   width: 200px;
   border-width: 2px;
   border-style: solid;
-  border-color: black;
+  border-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
   text-align: center;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .button__generar {
@@ -169,7 +174,7 @@ body {
   width: 170px;
   height: 50px;
   background-color: orange;
-  border: 2px solid black;
+  border-radius: 8px;
   text-align: center;
   color: white;
   font-weight: 600;
@@ -180,18 +185,18 @@ body {
   justify-content: center;
 }
 
-.tam_despensa{
+.tam_despensa {
   display: flex;
   justify-content: space-between;
 }
 
-.tam_despensa p{
+.tam_despensa p {
   width: 150px;
   font-weight: 600;
   font-size: 20px;
 }
 
-.button__type_despensa{
+.button__type_despensa {
   display: flex;
   gap: 30px;
 }
@@ -200,7 +205,7 @@ body {
   width: 95px;
   height: 50px;
   background-color: orange;
-  border: 2px solid black;
+  border-radius: 8px;
   text-align: center;
   color: white;
   font-weight: 600;
@@ -210,7 +215,7 @@ body {
   width: 170px;
   height: 50px;
   background-color: orange;
-  border: 2px solid black;
+  border-radius: 8px;
   text-align: center;
   color: white;
   font-weight: 600;
@@ -226,10 +231,10 @@ body {
   width: 170px;
   height: 50px;
   background-color: orange;
-  border: 2px solid black;
   text-align: center;
   color: white;
   font-weight: 600;
+  border-radius: 8px;
 }
 
 .box__buttons_output {
